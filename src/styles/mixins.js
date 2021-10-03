@@ -1,4 +1,4 @@
-export const gap = (gapX, gapY=gapX) => `
+export const gap = (gapY, gapX=gapY) => `
   column-gap: ${gapX};
   -webkit-column-gap: ${gapX};
   -o-column-gap: ${gapX};
