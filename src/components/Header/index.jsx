@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../../assets/logo";
+import Logo from "../../assets/Logo";
 import { gap } from "../../styles/mixins";
 
 const HeaderElement = styled.header`
@@ -9,6 +9,7 @@ const HeaderElement = styled.header`
   height: 72px;
   background: var(--color-white);
   box-shadow: var(--main-box-shadow);
+  z-index: 20;
 `;
 const Container = styled.div`
   height: 100%;

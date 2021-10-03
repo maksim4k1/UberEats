@@ -1,0 +1,14 @@
+.container{
+  width: 100%;
+  max-width: 972px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-flow: wrap;
+  & > footer{
+    align-self: end;
+  }
+}
