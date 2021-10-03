@@ -40,5 +40,6 @@ body{background: var(--color-white); color: var(--color-text-black); font-family
 	--color-text-black: #1D1D1D;
 	--color-text-grey: #626262;
 	--color-text-green: #327430;
-	--color-bg-darkening: rgb(0, 0, 0, 0.6);
+	--color-btn-border: #E0E0E0;
+	--main-box-shadow: 0px 0px 16px rgba(38, 38, 38, 0.16);
 }
