@@ -60,12 +60,14 @@ const Price = styled.div`
 `;
 const Button = styled.button`
   padding: 8px 16px;
-  margin: 0 23px;
   color: var(--color-white);
   font-size: 13px;
   background: var(--color-black);
   border-radius: 100px;
-  transition: all 0.3s;
+  transition: background 0.3s;
+  &:hover{
+    background: var(--color-green);
+  }
 `;
 
 function RestaurantInfo ({name="Трактир Пушкина", cuisine="Итальянская", currency="Р", image="https://images.unsplash.com/photo-1554998171-89445e31c52b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1710&q=80"}) {
