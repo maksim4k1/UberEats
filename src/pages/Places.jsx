@@ -5,11 +5,22 @@ import { gap } from "../styles/mixins";
 
 const PlacesElement = styled.div`
   margin: 90px auto;
+  @media screen and (max-width: 580px){
+    &{
+      margin: 40px auto;
+    }
+  }
 `;
 const List = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   ${gap("49px", "16px")}
+  @media screen and (max-width: 720px){
+    &{
+      grid-template-columns: 1fr;
+      ${gap("16px")}
+    }
+  }
 `;
 
 function Places () {

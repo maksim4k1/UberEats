@@ -10,8 +10,23 @@ const CardElement = styled.div`
   background: var(--color-white);
   border: 1px solid var(--color-card-border);
   border-radius: 2px;
+  transition: background 0.3s;
   &:hover{
     background: var(--color-white-hover);
+  }
+  @media screen and (max-width: 480px){
+    &{
+      height: 102px;
+      border: none;
+      border-bottom: 1px solid var(--color-card-border);
+      border-radius: 0;
+      &:hover{
+        background: var(--color-white);
+      }
+      &:hover div > p{
+        opacity: 1;
+      }
+    }
   }
 `;
 const Content = styled.div`
@@ -22,23 +37,41 @@ const Content = styled.div`
   flex-flow: column;
   align-items: flex-start;
   ${gap("4px")}
+  @media screen and (max-width: 480px){
+    &{
+      padding: 0 0 16px 0;
+    }
+  }
 `;
 const Name = styled.h3`
   width: 100%;
   font-size: 16px;
+  @media screen and (max-width: 480px){
+    &{
+      font-size: 14px;
+    }
+  }
 `;
 const Body = styled.p`
   width: 100%;
   color: var(--color-text-grey);
   font-size: 13px;
+  line-height: 21px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: opacity 0.3s;
+  @media screen and (max-width: 480px){
+    &{
+      -webkit-line-clamp: 2;
+      opacity: 0;
+    }
+  }
 `;
 const Info = styled.h5`
   margin: auto 0 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 `;
 const Image = styled.img`
@@ -46,6 +79,11 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: center;
+  @media screen and (max-width: 480px){
+    &{
+      width: 102px;
+    }
+  }
 `;
 
 function CardContent({name, body, info, image}){
