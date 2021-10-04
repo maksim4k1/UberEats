@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Card from "../components/Card";
+import Loader from "../components/UI/Loader";
 import { getPlaces } from "../requests";
 import { gap } from "../styles/mixins";
 
@@ -13,6 +13,7 @@ const PlacesElement = styled.div`
   }
 `;
 const List = styled.ul`
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   ${gap("49px", "16px")}
@@ -26,19 +27,21 @@ const List = styled.ul`
 
 function Places () {
   const [places, setPlaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPlaces().then(data => setPlaces(data));
+    setIsLoading(true);
+    getPlaces().then(data => {
+      setPlaces(data);
+      setIsLoading(false);
+    });
   }, []);
 
   return(
     <PlacesElement className="container">
-      <List>
-        {
-          places.map(place => {
-            return <Card key={place.id} name={place.name} body={place.cuisine} link={`/restaurant/${place.id}`} />
-          })
-        }
+      {isLoading ? <Loader/> : null}
+      <List style={Array.isArray(places) ? null : {gridTemplateColumns: "1fr"}}>
+        {places}
       </List>
     </PlacesElement>
   );
