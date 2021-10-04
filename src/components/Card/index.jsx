@@ -75,13 +75,13 @@ const Info = styled.h5`
   font-weight: 500;
 `;
 const Image = styled.img`
-  width: 170px;
+  min-width: 170px;
   height: 100%;
   object-fit: cover;
   object-position: center;
   @media screen and (max-width: 480px){
     &{
-      width: 102px;
+      min-width: 102px;
     }
   }
 `;
