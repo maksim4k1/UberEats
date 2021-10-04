@@ -11,30 +11,31 @@ const Title = styled.h2`
 `;
 const List = styled.ul`
   padding: 0;
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 49px;
   grid-column-gap: 16px;
-  padding-bottom: 80px;
 `;
 
-function RestaurantDishes () {
+function RestaurantDishes ({currency}) {
   const [dishes, setDishes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {id} = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    getDishes(id, "$").then(data => {
+    getDishes(id, currency).then(data => {
       setDishes(data);
       setIsLoading(false);
     });
-  }, [id]);
+  }, [id, currency]);
+
   return(
     <section className="container">
       <Title>Закуски</Title>
       {isLoading ? <Loader/> : null}
-      <List>
+      <List style={Array.isArray(dishes) ? null : {gridTemplateColumns: "1fr"}}>
         {dishes}
       </List>
     </section>

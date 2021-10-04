@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { gap } from "../../styles/mixins";
 
 const RestaurantInfoSection = styled.section`
   width: 100%;
@@ -43,6 +44,7 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${gap("40px")}
   @media screen and (max-width: 480px){
     &{
       display: block;
@@ -70,14 +72,16 @@ const Button = styled.button`
   }
 `;
 
-function RestaurantInfo ({name="Трактир Пушкина", cuisine="Итальянская", currency="Р", image="https://images.unsplash.com/photo-1554998171-89445e31c52b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1710&q=80"}) {
+function RestaurantInfo ({restaurant}) {
+  const {name, cuisine, currency, img} = restaurant;
+
   return(
-    <RestaurantInfoSection style={{backgroundImage: `url(${image})`}}>
+    <RestaurantInfoSection style={{backgroundImage: `url(${img})`}}>
       <div className="container">
         <Content>
           <Name>{name}</Name>
           <Info>
-            <Price>{currency + currency + currency} • {cuisine}</Price>
+            <Price>{currency} • {cuisine}</Price>
             <Button type="button">40 - 50 Min</Button>
           </Info>
         </Content>

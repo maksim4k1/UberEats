@@ -18,6 +18,17 @@ export async function getPlaces(){
   }
 }
 
+export async function getRestaurant(id){
+  try{
+    const response = await fetch(`${URL}/eats/places`);
+    const data = await response.json();
+    const restaurant = data.find(restaurant => restaurant.id === id);
+    return restaurant;
+  } catch(error){
+    return(`При запросе произола ошибка: ${error}`);
+  }
+}
+
 export async function getDishes(id, currency){
   try{
     const response = await fetch(`${URL}/eats/dishes/${id}`);
