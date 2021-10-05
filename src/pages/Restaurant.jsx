@@ -29,10 +29,15 @@ function reducer(state, {type, payload}){
         ...state,
         dishes: payload
       };
-    } case "SET_LOADING": {
+    } case "SHOW_LOADER": {
       return {
         ...state,
-        isLoading: payload
+        isLoading: true
+      };
+    } case "HIDE_LOADER": {
+      return {
+        ...state,
+        isLoading: false
       };
     } case "SET_MENU": {
       return {
@@ -45,7 +50,7 @@ function reducer(state, {type, payload}){
         dish: payload
       };
     } default: {
-      return state
+      return state;
     }
   }
 }
@@ -63,7 +68,7 @@ function Restaurant () {
   const {id} = useParams();
 
   useEffect(() => {
-    dispatch({type: "SET_LOADING", payload: true});
+    dispatch({type: "SHOW_LOADER"});
     getRestaurant(id).then(data => {
       dispatch({type: "SET_RESTAURANT", payload: data});
       return data;
@@ -73,7 +78,7 @@ function Restaurant () {
         dispatch({type: "SET_DISHES", payload: dishes});
         dispatch({type: "SET_MENU", payload: menu});
         dispatch({type: "SET_DISH", payload: menu[0]});
-        dispatch({type: "SET_LOADING", payload: false});
+        dispatch({type: "HIDE_LOADER"});
       });
     });
   }, [id]);

@@ -23,6 +23,10 @@ export async function getRestaurant(id){
     const response = await fetch(`${URL}/eats/places`);
     const data = await response.json();
     const restaurant = data.find(restaurant => restaurant.id === id);
+    if(restaurant === undefined){
+      window.location.href = "/error/500";
+      return;
+    }
     return restaurant;
   } catch(error){
     return(`При запросе произола ошибка: ${error}`);
