@@ -13,11 +13,7 @@ const Menu = styled.menu`
     background: var(--color-card-border);
     border-radius: 10px;
   }
-  @media screen and (max-width: 640px) {
-    &{
-      overflow: auto;
-    }
-  }
+  overflow: auto;
   @media screen and (max-width: 480px) {
     &{
       display: none;
@@ -39,16 +35,15 @@ const Button = styled.button`
   }
 `;
 
-function RestaurantMenu () {
+function RestaurantMenu ({menu, setDish, dish}) {
   return(
     <Menu>
       <Container className="container">
-        <Button className="active">Закуски</Button>
-        <Button>Салаты</Button>
-        <Button>Супы</Button>
-        <Button>Горячие блюда</Button>
-        <Button>Гарниры</Button>
-        <Button>Десерты</Button>
+        {
+          menu.map((item, index) => {
+            return <Button key={index} onClick={() => setDish(item)} className={item === dish ? "active" : null}>{item}</Button>;
+          })
+        }
       </Container>
     </Menu>
   );

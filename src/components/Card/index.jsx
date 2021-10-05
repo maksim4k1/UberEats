@@ -14,6 +14,9 @@ const CardElement = styled.div`
   &:hover{
     background: var(--color-white-hover);
   }
+  &:hover div > p{
+    opacity: 1;
+  }
   @media screen and (max-width: 480px){
     &{
       height: 102px;
@@ -22,9 +25,6 @@ const CardElement = styled.div`
       border-radius: 0;
       &:hover{
         background: var(--color-white);
-      }
-      &:hover div > p{
-        opacity: 1;
       }
     }
   }
@@ -61,11 +61,11 @@ const Body = styled.p`
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+  opacity: 0;
   transition: opacity 0.3s;
   @media screen and (max-width: 480px){
     &{
       -webkit-line-clamp: 2;
-      opacity: 0;
     }
   }
 `;

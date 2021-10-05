@@ -34,13 +34,20 @@ export async function getDishes(id, currency){
     const response = await fetch(`${URL}/eats/dishes/${id}`);
     const data = await response.json();
     if(data.length <= 0){
-      return("Список блюд пуст");
+      return(["Список блюд пуст", "Все блюда"]);
     } else{
-      return data.map(dish => {
-        return <Card key={dish.id} name={dish.name} body={dish.desc} image={dish.img} info={`${dish.price} ${currency}`} />
+      const filteredMenu = [];
+      data.forEach(item => {
+        if(filteredMenu.find(el => el === item.category) === undefined){
+          filteredMenu.push(item.category);
+        }
+      });
+      const dishes = data.map(dish => {
+        return <Card key={dish.id} name={dish.name} body={dish.desc} image={dish.img} info={`${dish.price} ${currency}`} category={dish.category} />
       })
+      return [dishes, filteredMenu]
     }
   } catch(error){
-    return(`При запросе произола ошибка: ${error}`);
+    return([`При запросе произола ошибка: ${error}`, "Все блюда"]);
   }
 }

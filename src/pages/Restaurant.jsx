@@ -5,7 +5,7 @@ import RestaurantDishes from "../components/RestaurantDishes";
 import RestaurantInfo from "../components/RestaurantInfo";
 import RestaurantMenu from "../components/ResturantMenu";
 import Loader from "../components/UI/Loader";
-import { getRestaurant } from "../requests";
+import { getDishes, getRestaurant } from "../requests";
 
 const RestaurantElement = styled.main`
   width: 100%;
@@ -19,14 +19,25 @@ const RestaurantElement = styled.main`
 
 function Restaurant () {
   const [restaurant, setRestaurant] = useState({});
+  const [dishes, setDishes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [menu, setMenu] = useState(["Все блюда"]);
+  const [dish, setDish] = useState(menu[0]);
   const {id} = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getRestaurant(id).then(data => {
       setRestaurant(data);
-      setIsLoading(false);
+      return data;
+    }).then(data => {
+      getDishes(id, data.currency).then(data => {
+        const [dishes, menu] = data;
+        setDishes(dishes);
+        setMenu(menu);
+        setDish(menu[0]);
+        setIsLoading(false);
+      });
     });
   }, [id]);
 
@@ -38,8 +49,8 @@ function Restaurant () {
       ? <div className="container">{restaurant}</div>
       : <>
         <RestaurantInfo restaurant={restaurant}/>
-        <RestaurantMenu/>
-        <RestaurantDishes currency={restaurant.currency}/>
+        <RestaurantMenu menu={menu} setDish={setDish} dish={dish}/>
+        <RestaurantDishes dishes={dishes} dish={dish}/>
       </>
       }
     </RestaurantElement>

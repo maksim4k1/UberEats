@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Loader from "../UI/Loader";
+import React from "react";
 import styled from "styled-components";
-import { getDishes } from "../../requests";
-import { useParams } from "react-router";
 
 const Title = styled.h2`
   font-size: 22px;
@@ -49,25 +46,16 @@ const List = styled.ul`
   }
 `;
 
-function RestaurantDishes ({currency}) {
-  const [dishes, setDishes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const {id} = useParams();
-
-  useEffect(() => {
-    setIsLoading(true);
-    getDishes(id, currency).then(data => {
-      setDishes(data);
-      setIsLoading(false);
-    });
-  }, [id, currency]);
-
+function RestaurantDishes ({dishes, dish}) {
   return(
     <section className="container">
-      <Title>Закуски</Title>
-      {isLoading ? <Loader/> : null}
+      <Title>{dish}</Title>
       <List style={Array.isArray(dishes) ? null : {gridTemplateColumns: "1fr"}}>
-        {dishes}
+        {
+          Array.isArray(dishes)
+          ? dishes.filter(el => el.props.category === dish)
+          : dishes
+        }
       </List>
     </section>
   );

@@ -4,7 +4,7 @@ import Loader from "../components/UI/Loader";
 import { getPlaces } from "../requests";
 import { gap } from "../styles/mixins";
 
-const PlacesElement = styled.div`
+const PlacesElement = styled.main`
   margin: 90px auto;
   @media screen and (max-width: 580px){
     &{
