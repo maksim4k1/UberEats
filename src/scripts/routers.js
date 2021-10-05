@@ -1,7 +1,7 @@
-import Error404 from "./pages/errors/Error404";
-import Error500 from "./pages/errors/Error500";
-import Places from "./pages/Places";
-import Restaurant from "./pages/Restaurant";
+import Error404 from "../pages/errors/Error404";
+import Error500 from "../pages/errors/Error500";
+import Places from "../pages/Places";
+import Restaurant from "../pages/Restaurant";
 
 const routers = [
   {path: "/", component: Places, exact: true},

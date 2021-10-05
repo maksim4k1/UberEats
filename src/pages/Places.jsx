@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Loader from "../components/UI/Loader";
-import { getPlaces } from "../requests";
+import { getPlaces } from "../scripts/requests";
 import { gap } from "../styles/mixins";
 
 const PlacesElement = styled.main`

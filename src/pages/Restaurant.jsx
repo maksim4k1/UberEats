@@ -5,7 +5,8 @@ import RestaurantDishes from "../components/RestaurantDishes";
 import RestaurantInfo from "../components/RestaurantInfo";
 import RestaurantMenu from "../components/ResturantMenu";
 import Loader from "../components/UI/Loader";
-import { getDishes, getRestaurant } from "../requests";
+import { getDishes, getRestaurant } from "../scripts/requests";
+import { HIDE_LOADER, SET_DISH, SET_DISHES, SET_MENU, SET_RESTAURANT, SHOW_LOADER } from "../scripts/types";
 
 const RestaurantElement = styled.main`
   width: 100%;
@@ -19,32 +20,32 @@ const RestaurantElement = styled.main`
 
 function reducer(state, {type, payload}){
   switch(type){
-    case "SET_RESTAURANT": {
+    case SET_RESTAURANT: {
       return {
         ...state,
         restaurant: payload
       };
-    } case "SET_DISHES": {
+    } case SET_DISHES: {
       return {
         ...state,
         dishes: payload
       };
-    } case "SHOW_LOADER": {
+    } case SHOW_LOADER: {
       return {
         ...state,
         isLoading: true
       };
-    } case "HIDE_LOADER": {
+    } case HIDE_LOADER: {
       return {
         ...state,
         isLoading: false
       };
-    } case "SET_MENU": {
+    } case SET_MENU: {
       return {
         ...state,
         menu: payload
       };
-    } case "SET_DISH": {
+    } case SET_DISH: {
       return {
         ...state,
         dish: payload
@@ -68,17 +69,17 @@ function Restaurant () {
   const {id} = useParams();
 
   useEffect(() => {
-    dispatch({type: "SHOW_LOADER"});
+    dispatch({type: SHOW_LOADER});
     getRestaurant(id).then(data => {
-      dispatch({type: "SET_RESTAURANT", payload: data});
+      dispatch({type: SET_RESTAURANT, payload: data});
       return data;
     }).then(data => {
       getDishes(id, data.currency).then(data => {
         const [dishes, menu] = data;
-        dispatch({type: "SET_DISHES", payload: dishes});
-        dispatch({type: "SET_MENU", payload: menu});
-        dispatch({type: "SET_DISH", payload: menu[0]});
-        dispatch({type: "HIDE_LOADER"});
+        dispatch({type: SET_DISHES, payload: dishes});
+        dispatch({type: SET_MENU, payload: menu});
+        dispatch({type: SET_DISH, payload: menu[0]});
+        dispatch({type: HIDE_LOADER});
       });
     });
   }, [id]);
@@ -91,7 +92,7 @@ function Restaurant () {
       ? <div className="container">{state.restaurant}</div>
       : <>
         <RestaurantInfo restaurant={state.restaurant}/>
-        <RestaurantMenu menu={state.menu} setDish={(value) => dispatch({type: "SET_DISH", payload: value})} dish={state.dish}/>
+        <RestaurantMenu menu={state.menu} setDish={(value) => dispatch({type: SET_DISH, payload: value})} dish={state.dish}/>
         <RestaurantDishes dishes={state.dishes} dish={state.dish}/>
       </>
       }
