@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import RestaurantDishes from "../components/RestaurantDishes";
@@ -17,40 +17,77 @@ const RestaurantElement = styled.main`
   }
 `;
 
+function reducer(state, {type, payload}){
+  switch(type){
+    case "SET_RESTAURANT": {
+      return {
+        ...state,
+        restaurant: payload
+      };
+    } case "SET_DISHES": {
+      return {
+        ...state,
+        dishes: payload
+      };
+    } case "SET_LOADING": {
+      return {
+        ...state,
+        isLoading: payload
+      };
+    } case "SET_MENU": {
+      return {
+        ...state,
+        menu: payload
+      };
+    } case "SET_DISH": {
+      return {
+        ...state,
+        dish: payload
+      };
+    } default: {
+      return state
+    }
+  }
+}
+
+const initialState = {
+  restaurant: {},
+  dishes: [],
+  isLoading: false,
+  menu: ["Все блюда"],
+  dish: "Все блюда",
+}
+
 function Restaurant () {
-  const [restaurant, setRestaurant] = useState({});
-  const [dishes, setDishes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [menu, setMenu] = useState(["Все блюда"]);
-  const [dish, setDish] = useState(menu[0]);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const {id} = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
+    dispatch({type: "SET_LOADING", payload: true});
     getRestaurant(id).then(data => {
-      setRestaurant(data);
+      dispatch({type: "SET_RESTAURANT", payload: data});
       return data;
     }).then(data => {
       getDishes(id, data.currency).then(data => {
         const [dishes, menu] = data;
-        setDishes(dishes);
-        setMenu(menu);
-        setDish(menu[0]);
-        setIsLoading(false);
+        dispatch({type: "SET_DISHES", payload: dishes});
+        dispatch({type: "SET_MENU", payload: menu});
+        dispatch({type: "SET_DISH", payload: menu[0]});
+        dispatch({type: "SET_LOADING", payload: false});
       });
     });
   }, [id]);
 
   return(
     <RestaurantElement>
-      {isLoading
+      {state.isLoading
       ? <Loader/>
-      : typeof(restaurant) === "string"
-      ? <div className="container">{restaurant}</div>
+      : typeof(state.restaurant) === "string"
+      ? <div className="container">{state.restaurant}</div>
       : <>
-        <RestaurantInfo restaurant={restaurant}/>
-        <RestaurantMenu menu={menu} setDish={setDish} dish={dish}/>
-        <RestaurantDishes dishes={dishes} dish={dish}/>
+        <RestaurantInfo restaurant={state.restaurant}/>
+        <RestaurantMenu menu={state.menu} setDish={(value) => dispatch({type: "SET_DISH", payload: value})} dish={state.dish}/>
+        <RestaurantDishes dishes={state.dishes} dish={state.dish}/>
       </>
       }
     </RestaurantElement>
