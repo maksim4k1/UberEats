@@ -16,7 +16,7 @@ const Menu = styled.menu`
   overflow: auto;
   @media screen and (max-width: 480px) {
     &{
-      display: none;
+      margin: 70px 0 0;
     }
   }
 `;

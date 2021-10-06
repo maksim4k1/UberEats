@@ -11,7 +11,7 @@ const Title = styled.h2`
       display: flex;
       justify-content: center;
       font-size: 22px;
-      margin: 113px 0 56px 0;
+      margin: 30px 0 56px 0;
     }
     &::after{
       content: "";
