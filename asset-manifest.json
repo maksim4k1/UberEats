@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/UberEats/static/css/main.cb55dabf.chunk.css",
-    "main.js": "/UberEats/static/js/main.58adc604.chunk.js",
-    "main.js.map": "/UberEats/static/js/main.58adc604.chunk.js.map",
+    "main.js": "/UberEats/static/js/main.0f4b27ec.chunk.js",
+    "main.js.map": "/UberEats/static/js/main.0f4b27ec.chunk.js.map",
     "runtime-main.js": "/UberEats/static/js/runtime-main.ba181aff.js",
     "runtime-main.js.map": "/UberEats/static/js/runtime-main.ba181aff.js.map",
-    "static/js/2.5bfe241f.chunk.js": "/UberEats/static/js/2.5bfe241f.chunk.js",
-    "static/js/2.5bfe241f.chunk.js.map": "/UberEats/static/js/2.5bfe241f.chunk.js.map",
+    "static/js/2.7c652e56.chunk.js": "/UberEats/static/js/2.7c652e56.chunk.js",
+    "static/js/2.7c652e56.chunk.js.map": "/UberEats/static/js/2.7c652e56.chunk.js.map",
     "index.html": "/UberEats/index.html",
     "static/css/main.cb55dabf.chunk.css.map": "/UberEats/static/css/main.cb55dabf.chunk.css.map",
-    "static/js/2.5bfe241f.chunk.js.LICENSE.txt": "/UberEats/static/js/2.5bfe241f.chunk.js.LICENSE.txt"
+    "static/js/2.7c652e56.chunk.js.LICENSE.txt": "/UberEats/static/js/2.7c652e56.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ba181aff.js",
-    "static/js/2.5bfe241f.chunk.js",
+    "static/js/2.7c652e56.chunk.js",
     "static/css/main.cb55dabf.chunk.css",
-    "static/js/main.58adc604.chunk.js"
+    "static/js/main.0f4b27ec.chunk.js"
   ]
 }
